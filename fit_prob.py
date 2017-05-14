@@ -312,7 +312,7 @@ class FitProb:
                                      is_random=is_random)
                 curr_fit.start()
                 t_pool.append(curr_fit)
-                # TODO Need to change back to multi-thread later
+                #!TODO Need to change back to multi-thread later
                 curr_fit.join()
             # for t in t_pool:
             #     t.join()
@@ -349,13 +349,19 @@ def main(argv):
         elif opt in ("-g", "--gname"):
             gname = arg
 
-    dirstr = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
-                       + collection + "/rank_rel/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
-                   + collection + "/background_gain/fit/"
-    gname_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"\
-                +collection+"/qrels/log_qrels/"
+    # dirstr = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
+    #                    + collection + "/rank_rel/"
+    # out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
+    #                + collection + "/background_gain/fit/"
+    # gname_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"\
+    #             +collection+"/qrels/log_qrels/"
+
+    #!todo provide function for generating matrix
+    dirstr = "default dir for rank \times relevance matrix"
+    out_dir = "default ouput dir"
+    gname_dir = "default LOG qrels"
     leave_out = []
+
     if gname is not "":
         out_dir += "leave-out/" + gname + "/"
         with open(gname_dir+"input."+gname+".txt", 'rb') as fin:
