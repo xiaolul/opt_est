@@ -1,4 +1,3 @@
-# opt_est
 *The scripts haven't been fully cleaned yet.*
 
 ## Preliminaries
@@ -8,7 +7,7 @@
 
 - By default (Currently), they are in binary mode.
 
-## Scripts contained in this repo perform two operations:
+## Operations done by those scripts
 1. Relevance fitting (fit_prob.py)
 2. The two-level estimation framework (\*opt.py and hybrid_opt.py related scripts.)
   
