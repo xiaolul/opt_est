@@ -1,4 +1,4 @@
-*The scripts haven't been fully cleaned yet.*
+*The scripts haven't been cleaned yet.*
 
 ## Preliminaries
 - All the estimations are based on contributing runs only.
