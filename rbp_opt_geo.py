@@ -148,7 +148,7 @@ def main(argv):
     qrelfile = ""
 
     depth = 10
-    collection = "rob"
+    collection = "rob04"
     # pd = 100
     # qid = 651
     try:
@@ -170,7 +170,6 @@ def main(argv):
     #     pd = 50
     # elif collection == "tb04":
     #     pd = 80
-
     rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
                 collection + "/doc_rank/"
     fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\

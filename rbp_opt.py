@@ -137,11 +137,11 @@ def main(argv):
     method = 3
     qrelfile = ""
     depth = 10
-    collection = "rob"
+    collection = "rob04"
     # pd = 100
     # qid = 651
     try:
-        opts, args = getopt.getopt(argv, "j:d:hc:", ["runf", "jfile", "depth"])
+        opts, args = getopt.getopt(argv, "j:d:c:h", ["jfile", "depth", "collection"])
     except getopt.GetoptError:
         print('-j <qrelfile> -d <depth> -h help')
         sys.exit(2)
@@ -160,12 +160,10 @@ def main(argv):
     # elif collection == "tb04":
     #     pd = 80
 
-    rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-                collection + "/doc_rank/"
-    fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection +"/background_gain/fit/origin/"+str(10) + "/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection+"/background_gain/sample_rbp/opt_score/"+str(depth) + "/"
+    prifix_dir = "testcase/"
+    rank_dir = prifix_dir + collection + "/doc_rank/"
+    fit_dir = prifix_dir + collection +"/background_gain/fit/origin/"+str(depth) + "/"
+    out_dir = prifix_dir+ collection+ "/background_gain/sample_rbp/opt_score/"+str(depth) + "/"
 
     curr_qrel = Qrel(qrelfile)
     qid = curr_qrel.get_qid()

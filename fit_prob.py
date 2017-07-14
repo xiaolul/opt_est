@@ -357,7 +357,7 @@ def main(argv):
     #             +collection+"/qrels/log_qrels/"
 
     #!todo provide function for generating matrix
-    dirstr = "default dir for rank \times relevance matrix"
+    dirstr = "default dir for rank times relevance matrix"
     out_dir = "default ouput dir"
     gname_dir = "default LOG qrels"
     leave_out = []

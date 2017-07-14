@@ -135,7 +135,7 @@ def get_doc_prob(qid, out_dir, rank_dir, fitted_dir, m = 4):
 def main(argv):
     qrelfile = ""
     depth = 10
-    collection = "rob"
+    collection = "rob04"
     try:
         opts, args = getopt.getopt(argv, "j:d:hc:", ["runf", "jfile", "depth"])
     except getopt.GetoptError:
@@ -152,12 +152,11 @@ def main(argv):
         elif opt in ("-c", "--c"):
             collection = arg
     #
-    strata_depth = 10
     #
     rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
                 collection + "/doc_rank/"
     fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection +"/background_gain/fit/origin/"+str(strata_depth) + "/"
+                collection +"/background_gain/fit/origin/"+str(depth) + "/"
     out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
                 collection+"/background_gain/sample_rbp/opt_doc/"+str(depth) + "/"
     #
