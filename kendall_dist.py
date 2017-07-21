@@ -305,10 +305,11 @@ def main(argv):
     # sig_dist(fname=fname, refmat = ref_pmat,
     #          depth = depth, out_dir=dir_str, qnum = qnum)
 
-    #sampling based output
-    ref_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+collection+"/trec_eval/rbp/"
-    input_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+collection+"/est_eval/sample/"
-    output_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/summary_res/tau_dist/"
+    #reference directory
+    ref_dir = "/trec_eval/rbp/"
+    #input directory of results
+    input_dir = "est_eval/sample/"
+    output_dir = "summary_res/tau_dist/"
     # sample_sim_calc(ref_dir=ref_dir,input_dir=input_dir,out_dir=output_dir,rnd=depth, collection=collection)
     # inf_sim_calc(ref_dir=ref_dir,rnd=depth,collection=collection,input_dir=input_dir+"sample_eval/summary/")
     # inf_discr_calc(rnd=depth,input_dir=input_dir+"inf_hybrid/summary/")

@@ -166,16 +166,11 @@ def main(argv):
             depth = int(arg)
         elif opt in ("-c", "--c"):
             collection = arg
-    # if collection == "tb06":
-    #     pd = 50
-    # elif collection == "tb04":
-    #     pd = 80
-    rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-                collection + "/doc_rank/"
-    fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection +"/background_gain/fit/origin/"+str(10) + "/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection+"/background_gain/sample_rbp/optg_score/"+str(depth) + "/"
+    prefix_dir = "testcase/"
+    #
+    rank_dir = prefix_dir + collection + "/doc_rank/"
+    fit_dir = prefix_dir + collection + "/background_gain/fit/origin/" + str(depth) + "/"
+    out_dir = prefix_dir + collection + "/background_gain/opt_geo/" + str(depth) + "/"
 
     curr_qrel = Qrel(qrelfile)
     qid = curr_qrel.get_qid()
@@ -190,5 +185,6 @@ def main(argv):
         for t in tlist:
             t.join()
     get_doc_prob(qid, out_dir, rank_dir, fit_dir)
+
 if __name__ == "__main__":
     main(sys.argv[1:])

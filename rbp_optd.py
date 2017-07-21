@@ -152,13 +152,11 @@ def main(argv):
         elif opt in ("-c", "--c"):
             collection = arg
     #
+    prefix_dir = "testcase/"
     #
-    rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-                collection + "/doc_rank/"
-    fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection +"/background_gain/fit/origin/"+str(depth) + "/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                collection+"/background_gain/sample_rbp/opt_doc/"+str(depth) + "/"
+    rank_dir = prefix_dir + collection + "/doc_rank/"
+    fit_dir  = prefix_dir + collection +"/background_gain/fit/origin/"+str(depth) + "/"
+    out_dir  = prefix_dir + collection+"/background_gain/opt_doc/"+str(depth) + "/"
     #
     curr_qrel = Qrel(qrelfile)
     qid = curr_qrel.get_qid()

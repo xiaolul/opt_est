@@ -196,17 +196,15 @@ def main(argv):
     elif collection == "tb04":
         cstr = "trec2004"
 
+#qres is where the trec qres files are
     if collection == "robust" or collection == "tb06":
-        qres_dir = "/research/remote/petabyte/users/xiaolul/syncbitbucket" \
-                   "/cluewebap/sigirexp/rank_order/original/"+cstr + "/"
+        qres_dir = "qres/rank_order/original/"+cstr + "/"
     else:
-        qres_dir = "/research/remote/petabyte/users/xiaolul/syncbitbucket" \
-                  "/cluewebap/sigirexp/trec_order/original/" + cstr + "/"
+        qres_dir = "qres/" + cstr + "/"
 
-    qrel_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-               collection+"/qrels/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-              collection+"/qrels/sample_qrels/"
+#directory of qrel files
+    qrel_dir =  collection+"/qrels/"
+    out_dir = "qrels/sample_qrels/"
     run_list = []
     with open(runfile, "rb") as fin:
         for lines in fin:

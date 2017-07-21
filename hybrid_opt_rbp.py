@@ -172,13 +172,10 @@ def main(argv):
     #     pd = 50
     # elif collection == "tb04":
     #     pd = 80
-
-    rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-               collection + "/doc_rank/"
-    # fit_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-    #           collection + "/topic_prob/withindepth/fitted/" + str(depth) + "/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-              collection + "/background_gain/sample_rbp/"
+    prifix_dir = "testcase/"
+    rank_dir = prifix_dir + collection + "/doc_rank/"
+    fit_dir = prifix_dir + collection + "/background_gain/fit/origin/" + str(depth) + "/"
+    out_dir = prifix_dir + collection + "/background_gain/sample_rbp/hybrid/" + str(depth) + "/"
 
     curr_qrel = Qrel(qrelfile)
     result_list = [None] * 4
