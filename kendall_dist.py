@@ -98,8 +98,8 @@ def sample_sim_calc(ref_dir, input_dir,collection, rnd, out_dir):
     ref_score = np.loadtxt(ref_dir+ "lb.txt",dtype=float)
     lb_score = np.loadtxt(ref_dir+ "lb."+str(rnd)+".txt",dtype=float)
     rm_score = np.loadtxt(ref_dir + "rm." + str(rnd) + ".txt", dtype=float)
-    opta_score = np.loadtxt(input_dir + "inf_hybrid/summary/opt."+str(rnd)+".txt",dtype=float)
-    optb_score = np.loadtxt(input_dir + "inf_hybrid/summary/optd."+str(rnd)+".txt",dtype=float)
+    opta_score = np.loadtxt(input_dir + "hybrid/summary/opt."+str(rnd)+".txt",dtype=float)
+    optb_score = np.loadtxt(input_dir + "hybrid/summary/optd."+str(rnd)+".txt",dtype=float)
     inf_score = np.loadtxt(input_dir + "sample_eval/summary/inf."+str(rnd)+".txt",dtype=float)
     sys_num = ref_score.shape[1]
     # lb, rm, inf, opta, optb

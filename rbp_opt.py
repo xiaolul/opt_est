@@ -163,7 +163,7 @@ def main(argv):
     prifix_dir = "testcase/"
     rank_dir = prifix_dir + collection + "/doc_rank/"
     fit_dir = prifix_dir + collection +"/background_gain/fit/origin/"+str(depth) + "/"
-    out_dir = prifix_dir+ collection+ "/background_gain/sample_rbp/opt_score/"+str(depth) + "/"
+    out_dir = prifix_dir+ collection+ "/background_gain/opt_score/"+str(depth) + "/"
 
     curr_qrel = Qrel(qrelfile)
     qid = curr_qrel.get_qid()

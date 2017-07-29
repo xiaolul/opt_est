@@ -75,7 +75,7 @@ class DumpRank:
 def main(argv):
     runfile = ""
     qrelfile = ""
-    collection = "robust"
+    collection = ""
     dump_rel = False
     pd = 100
     try:
@@ -103,19 +103,10 @@ def main(argv):
         elif opt in ("-d", "--depth"):
             pd = int(arg)
 
-    # because I am lazy to rename.. not necessary
-    cstr = "trec2006" if collection == "tb06" else collection
-    if collection=="tb04":
-        cstr="trec2004"
-    elif collection=="tb05":
-        cstr="trec2005"
+    cstr = collection
 
-    dirstr = "/research/remote/petabyte/users/xiaolul/syncbitbucket/" \
-             "cluewebap/sigirexp/trec_order/original/" + cstr + "/"
-    if collection=="robust" or collection == "tb06":
-        dirstr = "/research/remote/petabyte/users/xiaolul/syncbitbucket/" \
-                 "cluewebap/sigirexp/rank_order/original/" + cstr + "/"
-
+    dirstr = cstr  # director of runs
+    ##
     qrels = Qrel(qrelfile)
     runlist = []
     with open(runfile,'rb') as fin:
@@ -124,12 +115,10 @@ def main(argv):
     # start to dump rank
     dump_rank = DumpRank(runlist=runlist, qrels=qrels)
     if not dump_rel:
-        out_pref = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
-                   + collection + "/doc_rank/"
+        out_pref = "doc_rank/"
         dump_rank.dump_rank(out_pref)
     else:
-        out_pref = "/research/remote/petabyte/users/xiaolul/pool_probability/" \
-                   + collection + "/rank_rel/"
+        out_pref = "rank_rel/"
         dump_rank.dump_rel(out_pref,pd)
 
 if __name__ == "__main__":

@@ -164,12 +164,10 @@ def main(argv):
         elif opt in ("-g", "--depth"):
             gname = arg
 
-    rank_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-               collection + "/doc_rank/"
-    out_dir = "/research/remote/petabyte/users/xiaolul/pool_probability/naive_estimator/" + \
-              collection + "/"
-    gfile = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-            collection+"/qrels/log_qrels/input."+gname+".txt"
+    rank_dir = "doc_rank/"
+    out_dir = "naive_estimator/"
+    # gfile = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
+    #         collection+"/qrels/log_qrels/input."+gname+".txt"    # for leave group out
 
     gidx = []
     if gname!="":
@@ -178,13 +176,10 @@ def main(argv):
                 gidx.append(int(lines.strip()))
 
     if len(gidx) == 0:
-        qrelname = "/research/remote/petabyte/users/xiaolul/pool_probability/"+\
-                   collection+"/qrels/qrels." + str(depth) + ".txt"
+        qrelname ="qrels/qrels." + str(depth) + ".txt"  # qrel file for current depth
     else:
-        qrelname = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-                   collection + "/qrels/log_qrels/" + str(depth) + \
-                   "/qrels.input."+gname+".txt"
-    print  gname
+        qrelname = "qrels/log_qrels/" + str(depth) + "/qrels.input."+gname+".txt"   # for leave-group-out
+    # print  gname
     naive_est = NaiveEstimator(qrelname=qrelname, d=depth,
                                gname = gname, gidx = gidx)
     naive_est.naive_estimator(rank_dir=rank_dir, out_dir=out_dir)

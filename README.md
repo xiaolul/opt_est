@@ -18,22 +18,23 @@
         - Weighted geometric average (Comb2)
   
 ## Scripts and Explaination (that have been cleaned now)
-  1. fit_prob.py: model relevance as a function of retrieval rank.
+  1. dump_rank: rank-level back-ground estimations based on the input system matrix
+  2. fit_prob.py: model relevance as a function of retrieval rank.
      - By default, it is based on method in [1]
      - Left out run names can be provided and perform leave out experiments.
      - Open randomization can do a shuffle-and-average operation for the fitting process.
 
-  2. The first step optimizers in [2]
+  3. The first step optimizers in [2]
       - rbp_opt.py: loss-a and Comb1 
       - rbp_optd.py: loss-b and Comb1
       - rbp_opt_geo.py: loss-a and Comb2
       - rbp_optd_geo.py: loss-b and Comb2
       
-  3. hybrid_opt_rbp.py: the second level rank estimator in [2] 
+  4. hybrid_opt_rbp.py: the second level rank estimator in [2] 
   
-  4. kendall_dist.py: modified Kendall's distance defined in [2]
+  5. kendall_dist.py: modified Kendall's distance defined in [2]
   
-  5. naive_estimator.py: using coefficient of covariance in [3]
+  6. naive_estimator.py: using coefficient of covariance in [3]
   
    
   
@@ -42,7 +43,8 @@
  1. A set of contributing runs.
  2. The qrel file (which has the correct depth as specified)
  3. The rank-level estimations *must* run first as an input to the "*opt" estimators.
-      
+ 4. In order to calculate the distance, all systems are required to be evaluated, and formated into a matrix, which has dimensions topic \times sys_num.
+
 ## Referece
 [1] Xiaolu Lu, Alistair Moffat, and J. Shane Culpepper. "Modeling relevance as a function of retrieval rank." Information Retrieval Technology. Springer International Publishing, 2016. 3-15.
 
