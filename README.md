@@ -23,6 +23,7 @@
      - By default, it is based on method in [1]
      - Left out run names can be provided and perform leave out experiments.
      - Open randomization can do a shuffle-and-average operation for the fitting process.
+     
 
   3. The first step optimizers in [2]
       - rbp_opt.py: loss-a and Comb1 
@@ -35,6 +36,13 @@
   5. kendall_dist.py: modified Kendall's distance defined in [2]
   
   6. naive_estimator.py: using coefficient of covariance in [3]
+  
+  7. In eval_tools directory:
+     - goodness_of_fit.py: purely used for testing the rmse of curve fitting.
+       The ref_dir should point to the relevance matrix where each row is the 
+       relevance values returned by contributing systems and each column is a 
+       ranked list.
+ 
   
    
   
