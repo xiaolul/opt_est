@@ -50,7 +50,7 @@ class GofTest:
             tmp_delta = np.zeros(np.shape(estimate))
             for j in range(0, m):
                 tmp_delta[:, j] = np.square(estimate[:, j] - self._empirical_gain[:, i])
-            gof_rmse[i,:] = np.sqrt(np.mean(tmp_delta, axis=0))
+            gof_rmse[i, :] = np.sqrt(np.mean(tmp_delta[0:pd, :], axis=0))
         return np.mean(gof_rmse, axis=0)
 
 
@@ -60,7 +60,7 @@ def main(argv):
     ref_dir = "" # relevance matrix from rank 1 to d
     dir_str = "" # rank-level estimations.
     eval_tool = GofTest(ref_dir=ref_dir)
-    for i in xrange(10,100,10):
+    for i in xrange(10, 60, 10):
         mean_rmse = eval_tool.compute_gof_rmse(dir_str=dir_str, suf=".txt", delim=" ", pd=i)
         np.set_printoptions(precision=4)
         print mean_rmse

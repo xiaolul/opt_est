@@ -32,16 +32,21 @@
       - rbp_optd_geo.py: loss-b and Comb2
       
   4. hybrid_opt_rbp.py: the second level rank estimator in [2] 
+   
+  5. naive_estimator.py: using coefficient of covariance in [3]
   
-  5. kendall_dist.py: modified Kendall's distance defined in [2]
-  
-  6. naive_estimator.py: using coefficient of covariance in [3]
-  
-  7. In eval_tools directory:
+  6. In eval_tools directory:
      - goodness_of_fit.py: purely used for testing the rmse of curve fitting.
        The ref_dir should point to the relevance matrix where each row is the 
        relevance values returned by contributing systems and each column is a 
        ranked list.
+     
+     - kendall_dist.py: modified Kendall's distance defined in [2]
+       Input estimated scores, reference score, original pooling depth and output dir.
+       The estimated scores and reference score file should be formatted in the same way, 
+       which is a sys_num * topic_num length vector.
+       Topic numbers should also be specified.
+   
  
   
    

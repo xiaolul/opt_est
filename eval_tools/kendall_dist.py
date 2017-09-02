@@ -7,7 +7,7 @@ import getopt
 def tau_dist(fname, refmat, depth, out_dir, qnum):
     """
     Normalized tau distance, counting inversed pairs only.
-    :param fname:
+    :param curr_mat:
     :param ref_mat:
     :param depth:
     :param out_dir:
@@ -24,9 +24,10 @@ def tau_dist(fname, refmat, depth, out_dir, qnum):
     for i in range(0, mnum):
         curr_method = curr_mat[:, i]  # reshape vector to q*n matrix
         curr_score = np.zeros((qnum, sys_num))
-        qlist = range(0, len(curr_method), qnum)
-        for q in range(0, len(qlist)):
-            curr_score[:, q] = curr_method[qlist[q]:(qlist[q] + qnum)]
+        t = 0
+        while t < sys_num:
+            curr_score[:, t] = curr_method[t * qnum:(t + 1) * qnum]
+            t += 1
         for n in range(0, (sys_num - 1)):
             for s in range(n + 1, sys_num):
                 t_stat, p_val = stats.ttest_rel(curr_score[:, n],
@@ -202,6 +203,7 @@ def inf_discr_calc(rnd, input_dir):
                 pval_list.append(pval)
     print np.median(np.array(pval_list))
 
+
 def cov_inv_calc(ref_dir, rnd, input_dir=""):
     """
     calculate coverage ratio
@@ -256,10 +258,13 @@ def get_sign_pval(arr_a, arr_b):
 
 
 def main(argv):
-    collection = "robust"
-    dir_str = ""
-    depth = ""
+    # ---default values
+    collection = "trec10"
+    dir_str = collection + "/est_eval/fit_eval/origin/summary/combined."
+    tmp_out = ""
+    # depth = 50
     suf = "rbp"
+    pd = 100
     try:
         opts, args = getopt.getopt(argv, "c:p:d:s:q:h", ["collection", "path", "depth", "suf", "help"])
     except getopt.GetoptError:
@@ -273,47 +278,42 @@ def main(argv):
             collection = arg
         elif opt in ("-p", "--path"):
             dir_str = arg
-        elif opt in ("-d", "--file"):
-            depth = arg
+        elif opt in ("-d", "--file"):  # original pooling depth
+            pd = arg
         elif opt in ("-s", "--file"):
             suf = arg
 
 
-
     # #------calculate distance for the pooling method
-    # suf = "." + suf
-    # pref_str = "/research/remote/petabyte/users/xiaolul/pool_probability/" + collection + "/est_eval/"
-    # dir_str = pref_str + dir_str + "/summary/"
-    refname = "/research/remote/petabyte/users/xiaolul/pool_probability/" + \
-              collection + "/trec_eval/rbp/lb.txt"
-    ref_mat = np.loadtxt(refname, dtype=float)
-    sys_num = ref_mat.shape[1]
-    qnum = ref_mat.shape[0]
-    fname = dir_str + "combined." + str(depth) + suf
-    # ref_pmat = np.zeros((sys_num, sys_num))
-    # for i in range(0, (sys_num - 1)):
-    #     for j in range((i + 1), sys_num):
-    #         t_stat, pval = stats.ttest_rel(ref_mat[:, i],
-    #                                        ref_mat[:, j])
-    #         if np.mean(ref_mat[:, i]- ref_mat[:, j]) != 0:
-    #             if t_stat > 0:
-    #                 ref_pmat[i, j] = pval
-    #             else:
-    #                 ref_pmat[j, i] = pval
-    # tau_dist(fname=fname, refmat=ref_pmat,
-    #           depth=depth, out_dir=dir_str, qnum=qnum)
-    # sig_dist(fname=fname, refmat = ref_pmat,
-    #          depth = depth, out_dir=dir_str, qnum = qnum)
+    suf = "." + suf
+    t = 50  # number of topics
+    # pref_str = dir_str
+    refname = dir_str + str(pd) + suf
+    tmp_ref = np.loadtxt(refname, dtype=float, delimiter=",")  # first column is lb
+    # mnum = tmp_ref.shape[1]
+    sys_num = int(tmp_ref.shape[0] / t)
+    tmp_ref = tmp_ref[:, 0]
+    #
+    ref_mat = np.zeros((t, sys_num))
+    i = 0
+    while i < sys_num:
+        ref_mat[:, i] = tmp_ref[i * t:(i + 1) * t]
+        i += 1
+    ref_pmat = np.zeros((sys_num, sys_num))
+    for i in range(0, (sys_num - 1)):
+        for j in range((i + 1), sys_num):
+            t_stat, pval = stats.ttest_rel(ref_mat[:, i],
+                                           ref_mat[:, j])
+            if np.mean(ref_mat[:, i] - ref_mat[:, j]) != 0:
+                if t_stat > 0:
+                    ref_pmat[i, j] = pval
+                else:
+                    ref_pmat[j, i] = pval
+    # compute distance for rank-level estimators, without threshold
+    for k in range(10, pd + 1, 10):
+        sig_dist(dir_str + str(k) + suf, ref_pmat, k, tmp_out, t)
+        tau_dist(dir_str + str(k) + suf, ref_pmat, k, tmp_out, t)
 
-    #reference directory
-    ref_dir = "/trec_eval/rbp/"
-    #input directory of results
-    input_dir = "est_eval/sample/"
-    output_dir = "summary_res/tau_dist/"
-    # sample_sim_calc(ref_dir=ref_dir,input_dir=input_dir,out_dir=output_dir,rnd=depth, collection=collection)
-    # inf_sim_calc(ref_dir=ref_dir,rnd=depth,collection=collection,input_dir=input_dir+"sample_eval/summary/")
-    # inf_discr_calc(rnd=depth,input_dir=input_dir+"inf_hybrid/summary/")
-    cov_inv_calc(ref_dir=ref_dir,rnd=depth,input_dir=input_dir+"inf_hybrid/summary/")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
